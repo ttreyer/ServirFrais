@@ -10,7 +10,7 @@ public class FishMovement : MonoBehaviour {
     public bool inWater = true;
 
     private Rigidbody2D rbody;
-    private SpriteRenderer sprite;
+    private Animator animator;
 
     private int waterLayer;
     private float lookAtAnglePrev = 0.0f;
@@ -20,7 +20,7 @@ public class FishMovement : MonoBehaviour {
 	void Start () {
         waterLayer = LayerMask.NameToLayer("Water");
         rbody = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 	}
 
     private void FixedUpdate() {
@@ -32,8 +32,12 @@ public class FishMovement : MonoBehaviour {
 
         // Set a dead zone for the fish movements
         playerToMouse.z = 0.0f;
-        if (playerToMouse.sqrMagnitude < 0.0005f)
+        if (playerToMouse.sqrMagnitude > 0.01f) {
+            animator.SetBool("isSwimming", true);
+        } else {
             playerToMouse = Vector3.zero;
+            animator.SetBool("isSwimming", false);
+        }
 
         Move(playerToMouse);
 
@@ -59,30 +63,37 @@ public class FishMovement : MonoBehaviour {
     {
         float targetAngle = Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
         float lookAtAngle = Mathf.LerpAngle(lookAtAnglePrev, targetAngle, rotationSpeed * Time.deltaTime);
+        lookAtAngle = (lookAtAngle + 360.0f) % 360.0f;
         rbody.MoveRotation(lookAtAngle);
         lookAtAnglePrev = lookAtAngle;
+
+        // Flip fish when facing backward
+        if (90.0f < lookAtAngle && lookAtAngle <= 270.0f)
+            transform.localScale = new Vector3(1.0f, -1.0f, 1.0f);
+        else
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     private void Boost(Vector3 playerToMouse)
     {
         if (inWater) {
             rbody.AddForce(playerToMouse.normalized * boostSpeed);
+            animator.SetTrigger("boost");
         }
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (Input.GetMouseButtonDown(0))
             doBoost = true;
 
         if (inWater) {
             rbody.gravityScale = 0.0f;
             rbody.drag = 20.0f;
-            sprite.color = new Color(0.3f, .4f, 1.0f);
         } else {
             rbody.gravityScale = 10.0f;
             rbody.drag = 1.0f;
-            sprite.color = new Color(0.2f, 0.2f, 0.2f);
         }
 	}
 
