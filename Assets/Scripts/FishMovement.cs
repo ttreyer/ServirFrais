@@ -68,10 +68,13 @@ public class FishMovement : MonoBehaviour {
         lookAtAnglePrev = lookAtAngle;
 
         // Flip fish when facing backward
+        float x = transform.localScale.x;
+        float y = transform.localScale.y;
+        float z = transform.localScale.z;
         if (90.0f < lookAtAngle && lookAtAngle <= 270.0f)
-            transform.localScale = new Vector3(1.0f, -1.0f, 1.0f);
+            transform.localScale = new Vector3(x, -Mathf.Abs(y), z);
         else
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3(x, Mathf.Abs(y), z);
     }
 
     private void Boost(Vector3 playerToMouse)
