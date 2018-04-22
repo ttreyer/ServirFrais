@@ -28,6 +28,11 @@ public class CatMovement : MonoBehaviour {
 
     private Vector2 velocity;
 
+    public bool isAlive() {
+        return !immobile;
+
+    }
+
 
     // Use this for initialization
     void Start() {
