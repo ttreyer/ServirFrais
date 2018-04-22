@@ -35,11 +35,14 @@ public class EnemyScript : MonoBehaviour {
 		if(goLeft)
         {
             rb.velocity = (new Vector2(-v,0));
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         }
         else
         {
             rb.velocity = (new Vector2(v, 0f));
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+
         }
 	}
 }
