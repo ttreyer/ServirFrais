@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CatMovement : MonoBehaviour {
     float maxVelocity = 5.0f;
-    int jumplimit = 6000;
-    float gravity = -0.1f;
+    int jumplimit = 60;
+    float gravity = -10.0f;
     float meowDuration = 0.75f;
 
     public int grounded;
@@ -54,7 +54,7 @@ public class CatMovement : MonoBehaviour {
         float lowerG = 1.0f;
 
         if(immobile) {
-            rigidbody.MovePosition(rigidbody.position);
+            rigidbody.MovePosition(rigidbody.position+speed);
             return;
         }
         //meow
@@ -74,7 +74,7 @@ public class CatMovement : MonoBehaviour {
 
         if(meow) {
             meowTime++;
-            rigidbody.MovePosition(rigidbody.position);
+            rigidbody.MovePosition(rigidbody.position + speed);
             return;
         }
         //walk left and right
@@ -145,6 +145,9 @@ public class CatMovement : MonoBehaviour {
         if(coll.gameObject.layer == waterlayer) {
             die();
         }
+        if (coll.gameObject.tag == "Cat Danger") {
+            die();
+        }
     }
 
     void OnTriggerExit2D(Collider2D coll) {
@@ -155,6 +158,8 @@ public class CatMovement : MonoBehaviour {
 
     void die() {
         animator.SetBool("isDead",true);
+        GetComponent<Collider2D>().enabled = false;
+        speed.Set(0.0f, -0.2f);
         immobile = true;
     }
 
