@@ -7,7 +7,7 @@ public class FishMovement : MonoBehaviour {
     public float airSpeed = 10.0f;
     public float boostSpeed = 200.0f;
     public float rotationSpeed = 6.0f;
-    public bool inWater = true;
+    public int inWater = 0;
 
     private Rigidbody2D rbody;
     private Animator animator;
@@ -38,7 +38,7 @@ public class FishMovement : MonoBehaviour {
             playerToMouse = Vector3.zero;
             animator.SetBool("isSwimming", false);
         }
-
+        
         Move(playerToMouse);
 
         if (doBoost) {
@@ -51,7 +51,7 @@ public class FishMovement : MonoBehaviour {
     {
         float movementSpeed = waterSpeed;
 
-        if (!inWater) {
+        if (inWater == 0) {
             movementSpeed = airSpeed;
             playerToMouse.y = 0.0f;
         }
@@ -79,7 +79,7 @@ public class FishMovement : MonoBehaviour {
 
     private void Boost(Vector3 playerToMouse)
     {
-        if (inWater) {
+        if (inWater > 0) {
             rbody.AddForce(playerToMouse.normalized * boostSpeed);
             animator.SetTrigger("boost");
         }
@@ -91,7 +91,7 @@ public class FishMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
             doBoost = true;
 
-        if (inWater) {
+        if (inWater > 0) {
             rbody.gravityScale = 0.0f;
             rbody.drag = 20.0f;
         } else {
@@ -103,12 +103,12 @@ public class FishMovement : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == waterLayer)
-            inWater = true;
+            inWater++;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == waterLayer)
-            inWater = false;
+            inWater--;
     }
 }
