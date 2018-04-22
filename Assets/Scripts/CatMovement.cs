@@ -71,8 +71,9 @@ public class CatMovement : MonoBehaviour {
         if(jump && jumpHeight >= jumplimit) {
             lowerG = 2.0f;
         }
-        if (speed[1] < 0.0f && !falling && jump) {
-            animator.SetTrigger("falling");
+        if (speed[1] < -0.01f && !falling) {
+            animator.SetBool("isFalling",true);
+            //animator.SetTrigger("falling");
             falling = true;
         }
 
@@ -81,10 +82,11 @@ public class CatMovement : MonoBehaviour {
         
 
         //landing of a jump
-        if ( (grounded > 0) && jump && falling) {
+        if ( (grounded > 0) && falling) {
             jump = false;
             falling = false;
-            animator.SetTrigger("landing");
+            animator.SetBool("isFalling", false);
+            //animator.SetTrigger("landing");
         }
 
         //don't accelerate toward the ground
