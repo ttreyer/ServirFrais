@@ -32,7 +32,7 @@ public class FishMovement : MonoBehaviour {
 
         // Set a dead zone for the fish movements
         playerToMouse.z = 0.0f;
-        if (playerToMouse.sqrMagnitude > 0.01f) {
+        if (playerToMouse.sqrMagnitude > 0.25f) {
             animator.SetBool("isSwimming", true);
         } else {
             playerToMouse = Vector3.zero;
