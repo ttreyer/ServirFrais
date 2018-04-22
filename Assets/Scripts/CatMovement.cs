@@ -130,12 +130,12 @@ public class CatMovement : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D coll) {
-        if (coll.gameObject.tag != "Meow Zone") {
+        if (coll.gameObject.tag == "Meow Zone") {
             fisherman = coll.gameObject.GetComponentInParent<FishermanController>();
         }
     }
     void OnTriggerExit2D(Collider2D coll) {
-        if (coll.gameObject.tag != "Meow Zone") {
+        if (coll.gameObject.tag == "Meow Zone") {
             fisherman = null;
         }
     }
