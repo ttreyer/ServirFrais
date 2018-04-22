@@ -4,8 +4,8 @@ using UnityEngine;
 
 
 public class CatMovement : MonoBehaviour {
-    float maxVelocity = 5.0f;
-    int jumplimit = 60;
+    float maxVelocity = 7.0f;
+    int jumplimit = 30;
     float gravity = -10.0f;
     float meowDuration = 0.75f;
 
@@ -74,7 +74,7 @@ public class CatMovement : MonoBehaviour {
 
         if(meow) {
             meowTime++;
-            rigidbody.MovePosition(rigidbody.position + speed);
+            rigidbody.MovePosition(rigidbody.position);
             return;
         }
         //walk left and right
