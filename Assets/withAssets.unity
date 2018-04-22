@@ -1462,6 +1462,7 @@ GameObject:
   - component: {fileID: 684768462}
   - component: {fileID: 684768463}
   - component: {fileID: 684768464}
+  - component: {fileID: 684768465}
   m_Layer: 0
   m_Name: fish_evil_01
   m_TagString: Untagged
@@ -1566,12 +1567,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.5, y: 0}
   serializedVersion: 2
   m_Radius: 1.5
+--- !u!114 &684768465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 684768459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1741f27146890f04b801e0f67b1c86fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
 --- !u!1 &699906512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,6 +3224,7 @@ GameObject:
   - component: {fileID: 1258928232}
   - component: {fileID: 1258928231}
   - component: {fileID: 1258928233}
+  - component: {fileID: 1258928234}
   m_Layer: 0
   m_Name: fish_evil_01 (1)
   m_TagString: Untagged
@@ -3295,7 +3309,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.5, y: 0}
@@ -3338,6 +3352,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1258928234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1258928227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1741f27146890f04b801e0f67b1c86fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
 --- !u!1 &1291610947
 GameObject:
   m_ObjectHideFlags: 0
@@ -7988,6 +8014,7 @@ GameObject:
   - component: {fileID: 1661909320}
   - component: {fileID: 1661909321}
   - component: {fileID: 1661909319}
+  - component: {fileID: 1661909324}
   m_Layer: 0
   m_Name: fish_evil_01 (2)
   m_TagString: Untagged
@@ -8034,7 +8061,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.5, y: 0}
@@ -8115,6 +8142,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1661909324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1661909317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1741f27146890f04b801e0f67b1c86fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
 --- !u!1 &1670487196
 GameObject:
   m_ObjectHideFlags: 0
