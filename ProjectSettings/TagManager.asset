@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cat
+  - Meow Zone
+  - Fish Line
   layers:
   - Default
   - TransparentFX
