@@ -23,6 +23,8 @@ public class CatMovement : MonoBehaviour {
     private bool meowButton;
     private float meowTime;
     private FishermanController fisherman;
+    private int waterlayer;
+    private bool immobile;
 
     private Vector2 velocity;
 
@@ -39,6 +41,7 @@ public class CatMovement : MonoBehaviour {
         meowTime = 0.0f;
         meow = false;
         fisherman = null;
+        waterlayer = LayerMask.NameToLayer("Water");
     }
 
     // Update is called once per frame
@@ -50,6 +53,10 @@ public class CatMovement : MonoBehaviour {
     void FixedUpdate() {
         float lowerG = 1.0f;
 
+        if(immobile) {
+            rigidbody.MovePosition(rigidbody.position);
+            return;
+        }
         //meow
         if(meowButton && !jump && !falling) {
             animator.SetBool("isMeowing",true);
@@ -67,6 +74,7 @@ public class CatMovement : MonoBehaviour {
 
         if(meow) {
             meowTime++;
+            rigidbody.MovePosition(rigidbody.position);
             return;
         }
         //walk left and right
@@ -129,17 +137,26 @@ public class CatMovement : MonoBehaviour {
 
     }
 
+
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.gameObject.tag == "Meow Zone") {
             fisherman = coll.gameObject.GetComponentInParent<FishermanController>();
         }
+        if(coll.gameObject.layer == waterlayer) {
+            die();
+        }
     }
+
     void OnTriggerExit2D(Collider2D coll) {
         if (coll.gameObject.tag == "Meow Zone") {
             fisherman = null;
         }
     }
 
+    void die() {
+        animator.SetBool("isDead",true);
+        immobile = true;
+    }
 
 
 }
