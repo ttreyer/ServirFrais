@@ -7,7 +7,7 @@ public class CatMovement : MonoBehaviour {
     float maxVelocity = 5.0f;
     int jumplimit = 6000;
     float gravity = -0.1f;
-    int meowDuration = 300;
+    float meowDuration = 0.75f;
 
     public int grounded;
     public bool meow;
@@ -21,8 +21,10 @@ public class CatMovement : MonoBehaviour {
     private int jumpHeight;
     private Vector2 input;
     private bool meowButton;
-    private int meowTime;
+    private float meowTime;
     private FishermanController fisherman;
+    private int waterlayer;
+    private bool immobile;
 
     private Vector2 velocity;
 
@@ -36,9 +38,10 @@ public class CatMovement : MonoBehaviour {
         acceleration.Set(0.0f, gravity * Time.deltaTime);
         grounded = 0;
         animator = GetComponent<Animator>();
-        meowTime = 0;
+        meowTime = 0.0f;
         meow = false;
         fisherman = null;
+        waterlayer = LayerMask.NameToLayer("Water");
     }
 
     // Update is called once per frame
@@ -50,23 +53,28 @@ public class CatMovement : MonoBehaviour {
     void FixedUpdate() {
         float lowerG = 1.0f;
 
+        if(immobile) {
+            rigidbody.MovePosition(rigidbody.position);
+            return;
+        }
         //meow
         if(meowButton && !jump && !falling) {
             animator.SetBool("isMeowing",true);
-            meowTime = 0;
+            meowTime = 0.0f;
             meow = true;
             if(fisherman != null) {
                 fisherman.CuteSurprise();
             }
         }
 
-        if(meowDuration <= meowTime) {
+        if(meowDuration <= meowTime*Time.deltaTime) {
             animator.SetBool("isMeowing", false);
             meow = false;
         }
 
         if(meow) {
             meowTime++;
+            rigidbody.MovePosition(rigidbody.position);
             return;
         }
         //walk left and right
@@ -129,17 +137,26 @@ public class CatMovement : MonoBehaviour {
 
     }
 
+
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.gameObject.tag == "Meow Zone") {
             fisherman = coll.gameObject.GetComponentInParent<FishermanController>();
         }
+        if(coll.gameObject.layer == waterlayer) {
+            die();
+        }
     }
+
     void OnTriggerExit2D(Collider2D coll) {
         if (coll.gameObject.tag == "Meow Zone") {
             fisherman = null;
         }
     }
 
+    void die() {
+        animator.SetBool("isDead",true);
+        immobile = true;
+    }
 
 
 }
