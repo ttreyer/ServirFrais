@@ -79,6 +79,7 @@ public class FishMovement : MonoBehaviour {
 
     private void Boost(Vector3 playerToMouse)
     {
+        Debug.Log("salut salut:" + inWater);
         if (inWater) {
             rbody.AddForce(playerToMouse.normalized * boostSpeed);
             animator.SetTrigger("boost");

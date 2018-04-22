@@ -8,13 +8,16 @@ public class CatMovement : MonoBehaviour {
     int jumplimit = 6000;
 
     public int grounded;
+
+    private Animator animator;
     private Vector2 acceleration;
     private Vector2 speed;
     private Rigidbody2D rigidbody;
     private bool jump;
+    private bool falling;
     private int jumpHeight;
     private Vector2 input;
-    private Vector2 previousPos;
+
     private Vector2 velocity;
 
 
@@ -25,8 +28,8 @@ public class CatMovement : MonoBehaviour {
         input = new Vector2(0.0f, 0.0f);
         speed.Set(0.0f, 0.0f);
         acceleration.Set(0.0f, -0.1f * Time.deltaTime);
-        previousPos = rigidbody.position;
         grounded = 0;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -39,13 +42,19 @@ public class CatMovement : MonoBehaviour {
 
         if (input[0] < 0) {
             speed.Set(-maxVelocity, speed[1]);
+            animator.SetBool("isWalking", true);
+            animator.SetBool("Left", true);
         } else if (input[0] > 0) {
             speed.Set(maxVelocity, speed[1]);
+            animator.SetBool("isWalking", true);
+            animator.SetBool("Left", false);
         } else {
             speed.Set(0, speed[1]);
+            animator.SetBool("isWalking",false);
         }
 
         if (input[1] > 0 && !jump) {
+            animator.SetTrigger("rising");
             jump = true;
             jumpHeight = 0;
             speed.Set(speed[0], 6.0f);
@@ -62,13 +71,25 @@ public class CatMovement : MonoBehaviour {
         if(jump && jumpHeight >= jumplimit) {
             lowerG = 2.0f;
         }
+        if (speed[1] < 0.0f && !falling && jump) {
+            animator.SetTrigger("falling");
+            falling = true;
+        }
 
         //velocity = rigidbody.velocity;
         speed.Set(speed[0] + acceleration[0], speed[1] + acceleration[1]*lowerG);
+        
 
+        //landing of a jump
+        if ( (grounded > 0) && jump && falling) {
+            jump = false;
+            falling = false;
+            animator.SetTrigger("landing");
+        }
+
+        //don't accelerate toward the ground
         if (grounded > 0) {
             speed[1] = Mathf.Max(speed[1], 0.0f);
-            jump = false;
         }
         rigidbody.MovePosition(rigidbody.position + speed * Time.deltaTime);
 
