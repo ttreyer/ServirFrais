@@ -6,8 +6,11 @@ using UnityEngine;
 public class CatMovement : MonoBehaviour {
     float maxVelocity = 5.0f;
     int jumplimit = 6000;
+    float gravity = -0.1f;
+    int meowDuration = 300;
 
     public int grounded;
+    public bool meow;
 
     private Animator animator;
     private Vector2 acceleration;
@@ -17,6 +20,9 @@ public class CatMovement : MonoBehaviour {
     private bool falling;
     private int jumpHeight;
     private Vector2 input;
+    private bool meowButton;
+    private int meowTime;
+    private FishermanController fisherman;
 
     private Vector2 velocity;
 
@@ -27,19 +33,43 @@ public class CatMovement : MonoBehaviour {
         jump = false;
         input = new Vector2(0.0f, 0.0f);
         speed.Set(0.0f, 0.0f);
-        acceleration.Set(0.0f, -10f * Time.deltaTime);
+        acceleration.Set(0.0f, gravity * Time.deltaTime);
         grounded = 0;
         animator = GetComponent<Animator>();
+        meowTime = 0;
+        meow = false;
+        fisherman = null;
     }
 
     // Update is called once per frame
     void Update() {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetButton("Jump") ? 1.0f : 0.0f);
+        meowButton = Input.GetButton("Fire1");
     }
 
     void FixedUpdate() {
         float lowerG = 1.0f;
 
+        //meow
+        if(meowButton && !jump && !falling) {
+            animator.SetBool("isMeowing",true);
+            meowTime = 0;
+            meow = true;
+            if(fisherman != null) {
+                fisherman.CuteSurprise();
+            }
+        }
+
+        if(meowDuration <= meowTime) {
+            animator.SetBool("isMeowing", false);
+            meow = false;
+        }
+
+        if(meow) {
+            meowTime++;
+            return;
+        }
+        //walk left and right
         if (input[0] < 0) {
             speed.Set(-maxVelocity, speed[1]);
             animator.SetBool("isWalking", true);
@@ -53,12 +83,14 @@ public class CatMovement : MonoBehaviour {
             animator.SetBool("isWalking",false);
         }
 
-        if (input[1] > 0 && !jump) {
+        //jump triggered
+        if (input[1] > 0 && !jump && !falling) {
             animator.SetTrigger("rising");
             jump = true;
             jumpHeight = 0;
             speed.Set(speed[0], 6.0f);
         }
+        //variable height for jumps
         if (input[1] > 0 && jumpHeight<jumplimit) {
             jumpHeight++;
             lowerG = 0.2f;
@@ -71,9 +103,10 @@ public class CatMovement : MonoBehaviour {
         if(jump && jumpHeight >= jumplimit) {
             lowerG = 2.0f;
         }
+
+        //check for free fall
         if (speed[1] < -0.01f && !falling) {
             animator.SetBool("isFalling",true);
-            //animator.SetTrigger("falling");
             falling = true;
         }
 
@@ -86,7 +119,6 @@ public class CatMovement : MonoBehaviour {
             jump = false;
             falling = false;
             animator.SetBool("isFalling", false);
-            //animator.SetTrigger("landing");
         }
 
         //don't accelerate toward the ground
@@ -95,6 +127,17 @@ public class CatMovement : MonoBehaviour {
         }
         rigidbody.MovePosition(rigidbody.position + speed * Time.deltaTime);
 
+    }
+
+    void OnTriggerEnter2D(Collider2D coll) {
+        if (coll.gameObject.tag != "Meow Zone") {
+            fisherman = coll.gameObject.parent.GetComponent<FishermanController>();
+        }
+    }
+    void OnTriggerEnter2D(Collider2D coll) {
+        if (coll.gameObject.tag != "Meow Zone") {
+            fisherman = null;
+        }
     }
 
 
