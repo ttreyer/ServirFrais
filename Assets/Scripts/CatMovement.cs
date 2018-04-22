@@ -7,7 +7,7 @@ public class CatMovement : MonoBehaviour {
     float maxVelocity = 5.0f;
     int jumplimit = 6000;
     float gravity = -0.1f;
-    int meowDuration = 300;
+    float meowDuration = 0.75f;
 
     public int grounded;
     public bool meow;
@@ -21,7 +21,7 @@ public class CatMovement : MonoBehaviour {
     private int jumpHeight;
     private Vector2 input;
     private bool meowButton;
-    private int meowTime;
+    private float meowTime;
     private FishermanController fisherman;
 
     private Vector2 velocity;
@@ -36,7 +36,7 @@ public class CatMovement : MonoBehaviour {
         acceleration.Set(0.0f, gravity * Time.deltaTime);
         grounded = 0;
         animator = GetComponent<Animator>();
-        meowTime = 0;
+        meowTime = 0.0f;
         meow = false;
         fisherman = null;
     }
@@ -53,14 +53,14 @@ public class CatMovement : MonoBehaviour {
         //meow
         if(meowButton && !jump && !falling) {
             animator.SetBool("isMeowing",true);
-            meowTime = 0;
+            meowTime = 0.0f;
             meow = true;
             if(fisherman != null) {
                 fisherman.CuteSurprise();
             }
         }
 
-        if(meowDuration <= meowTime) {
+        if(meowDuration <= meowTime*Time.deltaTime) {
             animator.SetBool("isMeowing", false);
             meow = false;
         }
