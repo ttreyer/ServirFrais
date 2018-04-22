@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50989140634263830}
   - component: {fileID: 95396764067868786}
   m_Layer: 0
-  m_Name: fish_evil_01 (2)
+  m_Name: Evil Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
