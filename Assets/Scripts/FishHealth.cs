@@ -5,7 +5,8 @@ using UnityEngine;
 public class FishHealth : MonoBehaviour {
     public int maxHealth = 3;
     public float invulnDuration = 0.5f;
-    public float knockbackRatio = 3.0f;
+    public float inWaterKnockback = 5.0f;
+    public float inAirKnockback = 1.0f;
 
     private int health;
     private float invulnTimer = 0.0f;
@@ -36,6 +37,8 @@ public class FishHealth : MonoBehaviour {
         if (invulnTimer > 0.0f)
             return;
 
+        float knockbackRatio = (movement.inWater > 0) ? inWaterKnockback : inAirKnockback;
+        
         // Start invulnerability, but can't move
         invulnTimer = invulnDuration;
         movement.enabled = false;
