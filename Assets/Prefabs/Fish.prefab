@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffae18945b5916240915db83b896ec81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterSpeed: 50
+  waterSpeed: 30
   airSpeed: 10
-  boostSpeed: 200
+  boostSpeed: 150
   rotationSpeed: 6
   inWater: 0
 --- !u!212 &212686568934019824
