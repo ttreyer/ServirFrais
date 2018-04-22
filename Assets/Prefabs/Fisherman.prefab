@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4558589502219568}
   - component: {fileID: 61133722025388792}
+  - component: {fileID: 114151320941762458}
   m_Layer: 0
   m_Name: FishLine
   m_TagString: Fish Line
@@ -198,6 +199,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114151320941762458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1611249329243836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1741f27146890f04b801e0f67b1c86fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
 --- !u!114 &114473839833614826
 MonoBehaviour:
   m_ObjectHideFlags: 1
