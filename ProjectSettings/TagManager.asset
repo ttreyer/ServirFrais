@@ -42,6 +42,18 @@ TagManager:
   - name: Environment
     uniqueID: 2642971381
     locked: 0
+  - name: Background
+    uniqueID: 2000874673
+    locked: 0
+  - name: Decor
+    uniqueID: 4102253969
+    locked: 0
+  - name: Toucheable
+    uniqueID: 905692095
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2273733533
     locked: 0

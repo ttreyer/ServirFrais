@@ -27,7 +27,7 @@ public class CatMovement : MonoBehaviour {
         jump = false;
         input = new Vector2(0.0f, 0.0f);
         speed.Set(0.0f, 0.0f);
-        acceleration.Set(0.0f, -0.1f * Time.deltaTime);
+        acceleration.Set(0.0f, -10f * Time.deltaTime);
         grounded = 0;
         animator = GetComponent<Animator>();
     }
