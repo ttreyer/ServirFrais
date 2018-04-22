@@ -8,12 +8,12 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 center = Vector3.zero;
+        float centerX = 0;
         foreach (Transform target in targets)
-            center += target.position;
-        center /= targets.Length;
-        center.z = -10.0f;
+            centerX += target.position.x;
+        centerX /= targets.Length;
 
+        Vector3 center = new Vector3(centerX, transform.position.y, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, center, speed * Time.deltaTime);
 	}
 }
