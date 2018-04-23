@@ -25,6 +25,8 @@ public class CameraFollow : MonoBehaviour {
                 centerX += target.position.x;
             centerX /= targets.Length;
 
+            centerX = Mathf.Clamp(centerX, 2.0f, 250.0f);
+
             Vector3 center = new Vector3(centerX, transform.position.y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, center, speed * Time.deltaTime);
         }

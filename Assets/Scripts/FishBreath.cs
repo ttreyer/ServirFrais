@@ -33,15 +33,25 @@ public class FishBreath : MonoBehaviour {
             bar.SetActive(false);
         } else {
             breathTimer -= Time.deltaTime;
-            if (breathTimer < (breathDuration * 0.95))
+            if (breathTimer < (breathDuration * 0.95f))
                 bar.SetActive(true);
 
             float x = Mathf.Max(0.0f, maxX * breathTimer / breathDuration);
             float y = bar.transform.localScale.y, z = bar.transform.localScale.z;
             bar.transform.localScale = new Vector3(x, y, z);
 
-            if (breathTimer < 0.0f)
+            if (breathTimer < 0.0f) {
                 health.TakeDamage(health.maxHealth);
+                this.enabled = false;
+            }
         }
 	}
+    /*
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 200, 200), "Breath Duration: " + breathDuration, GUIStyle.none);
+        GUI.Label(new Rect(10, 30, 200, 200), "Breath Timer: " + breathTimer, GUIStyle.none);
+        GUI.Label(new Rect(10, 50, 200, 200), "Breath Display: " + (breathDuration * 0.95f), GUIStyle.none);
+    }
+    */
 }
