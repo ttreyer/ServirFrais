@@ -306,11 +306,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4335827892491126, guid: ac929fd63dc88e740a9e237bbdb97594, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.56
+      value: -5.62
       objectReference: {fileID: 0}
     - target: {fileID: 4335827892491126, guid: ac929fd63dc88e740a9e237bbdb97594, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.35
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 4335827892491126, guid: ac929fd63dc88e740a9e237bbdb97594, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2600,7 +2600,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 857389818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.07, y: -1.7199998, z: 0}
+  m_LocalPosition: {x: -4, y: -1.64, z: 0}
   m_LocalScale: {x: 6, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2842,8 +2842,9 @@ GameObject:
   m_Component:
   - component: {fileID: 959317487}
   - component: {fileID: 959317486}
-  - component: {fileID: 959317485}
   - component: {fileID: 959317484}
+  - component: {fileID: 959317488}
+  - component: {fileID: 959317485}
   m_Layer: 0
   m_Name: rock_05_dark
   m_TagString: Untagged
@@ -2871,8 +2872,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &959317485
-BoxCollider2D:
+--- !u!58 &959317485
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2883,19 +2884,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 2.62, y: -1.85}
   serializedVersion: 2
-  m_Size: {x: 5.12, y: 5.12}
-  m_EdgeRadius: 0
+  m_Radius: 0.91
 --- !u!212 &959317486
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2953,6 +2944,21 @@ Transform:
   m_Father: {fileID: 1022213607}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &959317488
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 959317483}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.017684292, y: -1.3286227}
+  m_Size: {x: 4.425685, y: 2.0586338}
+  m_Direction: 1
 --- !u!1 &971101492
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234813927}
   - component: {fileID: 1234813928}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DangerZone
   m_TagString: Cat Danger
   m_Icon: {fileID: 0}
