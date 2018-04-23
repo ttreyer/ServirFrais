@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class textEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
-    public Text theText;
+    private Text theText;
 
     public void Start()
     {

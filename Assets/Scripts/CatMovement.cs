@@ -24,7 +24,7 @@ public class CatMovement : MonoBehaviour {
     private float meowTime;
     private FishermanController fisherman;
     private int waterlayer;
-    private bool immobile;
+    private bool immobile = false;
 
     private Vector2 velocity;
 
@@ -166,6 +166,7 @@ public class CatMovement : MonoBehaviour {
         GetComponent<Collider2D>().enabled = false;
         speed.Set(0.0f, -0.2f);
         immobile = true;
+        Debug.Log(immobile);
     }
 
 
