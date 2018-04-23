@@ -52,7 +52,7 @@ public class CatMovement : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetButton("Jump") ? 1.0f : 0.0f);
-        meowButton = Input.GetButton("Fire1");
+        meowButton = Input.GetButton("Fire2");
     }
 
     void FixedUpdate() {
