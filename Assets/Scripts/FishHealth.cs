@@ -10,6 +10,7 @@ public class FishHealth : MonoBehaviour {
 
     private int health;
     private float invulnTimer = 0.0f;
+    private bool isAlive = true;
 
     private Rigidbody2D rbody;
     private FishMovement movement;
@@ -52,9 +53,15 @@ public class FishHealth : MonoBehaviour {
 
     private void Die()
     {
+        isAlive = false;
         invulnTimer = Mathf.Infinity;
         movement.enabled = false;
         animator.SetBool("isKnocked", false);
         animator.SetTrigger("die");
+    }
+
+    public bool IsAlive()
+    {
+        return isAlive;
     }
 }

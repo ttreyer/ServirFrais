@@ -6,14 +6,14 @@ using UnityEngine.UI; // Required when Using UI elements.
 public class gameoverScript : MonoBehaviour {
 
     private CatMovement cat;
-    private FishMovement fish;
+    private FishHealth fish;
     private Canvas c;
 
     // Use this for initialization
     void Start ()
     {
-        cat = GameObject.FindGameObjectsWithTag("Cat")[0].GetComponent<CatMovement>();
-        fish = GameObject.FindGameObjectsWithTag("Fish")[0].GetComponent<FishMovement>();
+        cat = GameObject.FindGameObjectWithTag("Cat").GetComponent<CatMovement>();
+        fish = GameObject.FindGameObjectWithTag("Fish").GetComponent<FishHealth>();
         
         c = GetComponent<Canvas>();
         c.enabled = false;
@@ -22,7 +22,7 @@ public class gameoverScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!cat.isAlive())
+        if (!cat.isAlive() || !fish.IsAlive())
         {
             c.enabled = true;
         }
