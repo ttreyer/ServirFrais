@@ -18,14 +18,12 @@ public class GroundCollider : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.gameObject.tag != "Cat" && coll.gameObject.tag != "Meow Zone" && coll.gameObject.tag != "Fish Line") {
             parentscript.grounded++;
-            Debug.Log("grounded!");
         } 
     }
 
     void OnTriggerExit2D(Collider2D coll) {
         if (coll.gameObject.tag != "Cat" && coll.gameObject.tag != "Meow Zone" && coll.gameObject.tag != "Fish Line") {
             parentscript.grounded--;
-            Debug.Log("décollage!");
         }
     }
 }

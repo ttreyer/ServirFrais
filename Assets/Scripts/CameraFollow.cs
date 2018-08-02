@@ -6,19 +6,19 @@ public class CameraFollow : MonoBehaviour {
     public float speed = 10.0f;
     public Transform[] targets;
     private CatMovement cat;
-    private FishMovement fish;
+    private FishHealth fish;
 
     private void Start()
     {
 
-        cat = GameObject.FindGameObjectsWithTag("Cat")[0].GetComponent<CatMovement>();
-        fish = GameObject.FindGameObjectsWithTag("Fish")[0].GetComponent<FishMovement>();
+        cat = GameObject.FindGameObjectWithTag("Cat").GetComponent<CatMovement>();
+        fish = GameObject.FindGameObjectWithTag("Fish").GetComponent<FishHealth>();
     }
 
     // Update is called once per frame
     void Update () {
 
-        if (cat.isAlive())
+        if (cat.isAlive() && fish.IsAlive())
         {
             float centerX = 0;
             foreach (Transform target in targets)

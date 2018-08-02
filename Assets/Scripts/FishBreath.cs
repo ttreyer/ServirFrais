@@ -10,18 +10,18 @@ public class FishBreath : MonoBehaviour {
     private float maxX;
     private Vector3 offset;
 
-    private Animator animator;
     private FishMovement movement;
     private FishHealth health;
 
 	// Use this for initialization
 	void Start () {
-        animator = GetComponent<Animator>();
         movement = GetComponent<FishMovement>();
         health = GetComponent<FishHealth>();
 
         maxX = bar.transform.localScale.x;
         offset = bar.transform.position - transform.position;
+
+        breathTimer = breathDuration;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +46,7 @@ public class FishBreath : MonoBehaviour {
             }
         }
 	}
+
     /*
     private void OnGUI()
     {

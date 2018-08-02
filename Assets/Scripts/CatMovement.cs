@@ -107,8 +107,6 @@ public class CatMovement : MonoBehaviour {
         if (input[1] > 0 && jumpHeight<jumplimit) {
             jumpHeight++;
             lowerG = 0.2f;
-            if (jumpHeight == jumplimit)
-                Debug.Log("MAX JUMP!");
         }
         if (!(input[1] > 0) && jump) {
             jumpHeight = jumplimit;
@@ -166,7 +164,6 @@ public class CatMovement : MonoBehaviour {
         GetComponent<Collider2D>().enabled = false;
         speed.Set(0.0f, -0.2f);
         immobile = true;
-        Debug.Log(immobile);
     }
 
 
