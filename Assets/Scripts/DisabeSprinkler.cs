@@ -26,9 +26,7 @@ public class DisabeSprinkler : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D coll) {
-        Debug.Log("Jeremy");
         if (coll.gameObject.tag == "Fish") {
-            Debug.Log("Mariano");
             dangerZone.enabled = false;
             ps.Stop();
         }
